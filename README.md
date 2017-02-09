@@ -16,9 +16,15 @@
 - `sudo dd if=/dev/disk3 bs=1m of=/pathToFolder/fileName.img.gz` - without compression and progress indicator, see below for alternative
 - `sudo dd if=/dev/disk3 bs=1m | pv -s 16g | gzip > /pathToFolder/fileName.img.gz` - uses compression and reduces image size as otherwise images are going to be the same size as SD card size, compression will collapse free space in cards. Here `-s 16g` is the size of SD card.
 
-### ssh into raspberry
+### SSH into Raspberry PI
 
 Raspberry PI should be on the same network as your computer you are `ssh`ing from. Provided that you know IP address of RPi you can connect by `ssh pi@192.168.2.2` where `pi` is username of the account set up on RPi image and `192.168.2.2` is the IP address of RPi on your network.
+
+*If authenticity cannot be established*
+
+Sometimes you have different RPi having the same IP that is in known hosts file already, this will yeld error: `The authenticity of host '192.168.2.2 (192.168.2.2)' can't be established.`, but you do not want to replace entry in known hosts or add new one, then solution is:
+
+`ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" pi@192.168.2.2`
 
 #### Username/Password
 
